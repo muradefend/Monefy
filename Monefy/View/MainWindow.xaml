@@ -1,0 +1,378 @@
+﻿<Window x:Class="Monefy.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        xmlns:local="clr-namespace:Monefy.View"
+        mc:Ignorable="d"
+        Title="Monefy" Height="600" Width="600" MinHeight="600" MinWidth="600" Background="LightGray"  Closing="Window_Closing" WindowStartupLocation="CenterScreen">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="1.3*"/>
+            <RowDefinition Height="13*"/>
+
+        </Grid.RowDefinitions>
+
+        
+        <!-- Menu -->
+        <Grid Grid.Row="0" Background="Blue" >
+
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5*"/>
+
+            </Grid.ColumnDefinitions>
+
+
+            <Label Name="intervalDateLabel" Grid.Column="0" Content="≡" Background="Blue" Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"
+                   MouseDown="intervalDateLabel_MouseDown"/>
+
+            <Label Grid.Column="1" Content="Monefy" Background="Blue" Foreground="White" FontSize="20" FontFamily="Impact" VerticalContentAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0"/>
+
+        </Grid> <!-- Menu -->
+
+        
+        
+        <!-- Main App -->
+        <Grid Grid.Row="1" Name="mainAppGrid" MouseDown="mainAppGrid_MouseDown">
+
+
+            <!-- Main UI Panel -->
+            <Grid>
+
+                <Grid.RowDefinitions>
+
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="13*"/>
+                    <RowDefinition Height="4.2*"/>
+
+                </Grid.RowDefinitions>
+
+                
+                <!-- Time Span -->
+                <Grid Grid.Row="0">
+                    <Label Name="dateLabel" HorizontalAlignment="Center" FontSize="10" FontWeight="Bold" Content="Date"/>
+                </Grid> <!-- Time Span -->
+
+
+
+                <!-- Expences and Balance -->
+                <Grid Grid.Row="1">
+
+
+                    <!-- Expence Circle -->
+                    <Grid>
+
+
+                        <Grid.RowDefinitions>
+
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="0.7*"/>
+
+                        </Grid.RowDefinitions>
+
+
+                        <Grid.ColumnDefinitions>
+
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+
+                        </Grid.ColumnDefinitions>
+
+
+                        <StackPanel Grid.Row="0" Grid.Column="0" Height="300" VerticalAlignment="Top">
+
+                            <Image Name="sportsIconImage" Height="30"/>
+                            <Label HorizontalAlignment="Center" Name="sportsPercentageLabel" Content="{Binding Path=SportsExpencePercentage}"/>
+
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Row="0" Grid.Column="1" Height="300" VerticalAlignment="Top">
+
+                            <Image Name="toiletryImage" Height="30"/>
+                            <Label HorizontalAlignment="Center" Name="toiletryPercentageLabel" Content="{Binding Path=ToietryExpencePercentage}"/>
+                        
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Row="0" Grid.Column="2" Height="300" VerticalAlignment="Top">
+
+                            <Image Name="transportImage" Height="30"/>
+                            <Label HorizontalAlignment="Center" Name="transportPercentageLabel" Content="{Binding Path=TransportExpencePercentage}"/>
+
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Row="0" Grid.Column="3" Height="300" VerticalAlignment="Top">
+
+                            <Image Name="eatingOutImage" Height="30"/>
+                            <Label HorizontalAlignment="Center" Name="eatingOutPercentageLabel" Content="{Binding Path=EatingOutExpencePercentage}"/>
+
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Grid.Column="0" Height="300" VerticalAlignment="Top">
+
+                            <Image Name="taxiImage" Height="30"/>
+                            <Label HorizontalAlignment="Center" Name="taxiPercentageLabel" Content="{Binding Path=TaxiExpencePercentage}"/>
+                            
+                        </StackPanel>
+                        
+                        
+                        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3" Background="LightGray" Height="300" VerticalAlignment="Top">
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <Label Content="Totally Earned: " Foreground="Blue" FontSize="20" FontWeight="Bold"/>
+                                <Label Content="{Binding TotalIncome}" Foreground="Blue" FontSize="20"/>
+                                
+                            </StackPanel>
+
+
+
+                            <StackPanel Orientation="Horizontal" Margin="0,25,0,0">
+
+                                <Label Content="Totally Spent: " Foreground="Red" FontSize="20" FontWeight="Bold"/>
+                                <Label Content="{Binding TotalExpence}" Foreground="Red" FontSize="20"/>
+
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,25,0,0">
+
+                                <Button Background="Gray" Width="200" Name="RefreshButton" Click="chooseAllIntervalButton_Click"  Content="Refresh" Command="{Binding AllIntervalCommand}" HorizontalAlignment="Center"/>
+
+                            </StackPanel>
+
+
+                        </StackPanel>
+                        
+                        
+                        <StackPanel Grid.Row="1" Grid.Column="3" Height="300" VerticalAlignment="Top">
+
+                            <Image Name="houseImage" Height="30"/>
+                            <Label HorizontalAlignment="Center" Name="housePercentageLabel" Content="{Binding Path=HouseExpencePercentage}"/>
+
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Row="2" Grid.Column="0" Height="300" VerticalAlignment="Top">
+
+                            <Image Name="clothesImage" Height="30"/>
+                            <Label HorizontalAlignment="Center" Name="clothesPercentageLabel" Content="{Binding Path=ClothesExpencePercentage}"/>
+
+                        </StackPanel>
+                        
+                        
+                        
+                        <StackPanel Grid.Row="2" Grid.Column="3" Height="300" VerticalAlignment="Top">
+
+                            <Image Name="foodImage" Height="30"/>
+                            <Label HorizontalAlignment="Center" Name="foodPercentageLabel" Content="{Binding Path=FoodExpencePercentage}"/>
+
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Row="3" Grid.Column="0" Height="300" VerticalAlignment="Top">
+
+                            <Image Name="giftsImage" Height="30"/>
+                            <Label HorizontalAlignment="Center" Name="giftsPercentageLabel" Content="{Binding Path=GiftsExpencePercentage}"/>
+
+                        </StackPanel>
+                        
+                        
+                        <StackPanel Grid.Row="3" Grid.Column="3" Height="300" VerticalAlignment="Top">
+
+                            <Image Name="entertainmentImage" Height="30"/>
+                            <Label HorizontalAlignment="Center" Name="entertainmentPercentageLabel" Content="{Binding Path=EntertainmentExpencePercentage}"/>
+
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Row="4" Grid.Column="0" Height="300" VerticalAlignment="Top">
+
+                            <Image Name="petImage" Height="30"/>
+                            <Label HorizontalAlignment="Center" Name="petPercentageLabel" Content="{Binding Path=PetsExpencePercentage}"/>
+
+                        </StackPanel>
+ 
+                        
+                        <StackPanel Grid.Row="4" Grid.Column="1" Height="300" VerticalAlignment="Top">
+
+                            <Image Name="communicationsImage" Height="30"/>
+                            <Label HorizontalAlignment="Center" Name="communicationsPercentageLabel" Content="{Binding Path=CommunicationExpencePercentage}"/>
+
+                        </StackPanel>
+                        
+                        
+                        <StackPanel Grid.Row="4" Grid.Column="2" Height="300" VerticalAlignment="Top">
+
+                            <Image Name="carImage" Height="30"/>
+                            <Label HorizontalAlignment="Center" Name="carPercentageLabel" Content="{Binding Path=CarExpencePercentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        </StackPanel>
+                        
+                        
+                        <StackPanel Grid.Row="4" Grid.Column="3" Height="300" VerticalAlignment="Top">
+
+                            <Image Name="healthImage" Height="30"/>
+                            <Label HorizontalAlignment="Center" Name="healthPercentageLabel" Content="{Binding Path=HealthExpencePercentage}"/>
+                            
+                        </StackPanel>
+
+
+                    </Grid>  <!-- Expence Circle -->
+
+
+
+                    <!-- Overall balance -->
+                    <StackPanel Name="balanceStackPanel" VerticalAlignment="Bottom" Height="34" Orientation="Vertical" Background="LightGray">
+
+
+                        <StackPanel>
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="*"/>
+
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0" Content="Easy to Spend" FontSize="12" FontStyle="Italic" FontFamily="JasmineUPC" Foreground="Green" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <Button Name="button1" Grid.Column="1" Height="32" Margin="12,0,12,1" BorderThickness="1" BorderBrush="Green" 
+                                        Background="Blue" Foreground="White" FontSize="14" FontWeight="Bold" FontFamily="JasmineUPC">
+
+                                    <StackPanel Orientation="Horizontal">
+
+                                        <Label Content="My Total Balance: " Foreground="White" />
+                                        <Label Content="{Binding Balance}" Foreground="White"/>
+
+                                    </StackPanel>
+                                    
+                                    
+                                </Button>
+                                <Label Grid.Column="2"  Content="Hard to Earn" FontSize="12" FontStyle="Italic" FontFamily="JasmineUPC" Foreground="Green" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                            </Grid>
+                        </StackPanel>
+
+                    </StackPanel> <!-- Overall balance -->
+                    
+                </Grid> <!-- Expences and Balance -->
+
+
+
+
+                <!-- Expence and Income Buttons -->
+                <Grid Grid.Row="2">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Button Grid.Column="1" Name="expenceButton" Click="expenceButton_Click" Content="Spend" FontSize="30" FontWeight="Bold" Foreground="Red" Background="White" 
+                            BorderBrush="Red" BorderThickness="6" Margin="0,10,0,6">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="100"/>
+                            </Style>
+                        </Button.Resources>    
+                    </Button>
+
+                    <Button Grid.Column="3" Name="incomeButton" Click="incomeButton_Click" Content="Add" FontSize="30" FontWeight="Bold" Foreground="Blue" Background="White" 
+                            BorderBrush="Blue" BorderThickness="6" Margin="0,10,0,6">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="100"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                </Grid> <!-- Expence and Income Buttons -->
+
+
+
+            </Grid> <!-- Main UI Panel -->
+
+
+
+            
+            <!-- Date Stack Panel(Left) -->
+            <Grid Grid.Row="0" Grid.RowSpan="3">
+
+                <StackPanel Name="intervalDateStackPanel" Width="0" HorizontalAlignment="Left" Background="LightBlue">
+
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+
+                            <RowDefinition Height="1.3*"/>
+                            <RowDefinition Height="1.3*"/>
+                            <RowDefinition Height="1.3*"/>
+                            <RowDefinition Height="1.3*"/>
+                            <RowDefinition Height="1.3*"/>
+                            <RowDefinition Height="1.3*"/>
+                            <RowDefinition Height="1.3*"/>
+
+                        </Grid.RowDefinitions>
+
+
+                        <Grid Grid.Row="0">
+                            <Button Name="chooseDayButton" Click="chooseDayButton_Click" Margin="5,10,5,10" Content="Day" Command="{Binding DayCommand}"/>
+                        </Grid>
+                    
+                        <Grid Grid.Row="1">
+                            <Button Name="chooseWeekButton" Click="chooseWeekButton_Click" Margin="5,10,5,10" Content="Week" Command="{Binding WeekCommand}"/>
+                        </Grid>
+                    
+                        <Grid Grid.Row="2">
+                            <Button Name="chooseMonthButton" Click="chooseMonthButton_Click" Margin="5,10,5,10" Content="Month" Command="{Binding MonthCommand}"/>
+                        </Grid>
+                    
+                        <Grid Grid.Row="3">
+                            <Button Name="chooseYearButton" Click="chooseYearButton_Click" Margin="5,10,5,10" Content="Year" Command="{Binding YearCommand}"/>
+                        </Grid>
+                    
+                        <Grid Grid.Row="4">
+                            <Button Name="chooseAllIntervalButton" Click="chooseAllIntervalButton_Click"  Margin="5,10,5,10" Content="All" Command="{Binding AllIntervalCommand}"/>
+                        </Grid>
+                    
+                    
+                        <Grid Grid.Row="5">
+                            <Button Name="chooseAnyDateButton" Click="chooseAnyDateButton_Click" Margin="5,10,5,10" Content="Find for date" Command="{Binding ChosenDateCommand}"/>
+                        </Grid>
+
+                        <Grid Grid.Row="6">
+                            <DatePicker Name="datePicker" SelectedDate="{Binding ChosenDate}"/>
+                        </Grid>
+                        
+                    </Grid>
+
+
+                
+                </StackPanel> <!-- Date Stack Panel(Left) -->
+
+            </Grid>
+
+        </Grid>
+        
+        
+        
+        
+    </Grid>
+
+</Window>
